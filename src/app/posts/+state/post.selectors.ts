@@ -16,3 +16,8 @@ export const selectError = createSelector(
   selectBlog,
   (state: PostStore) => state.error
 );
+
+export const selectActivePost = createSelector(
+  selectBlog,
+  (state: PostStore) => state.activePostId
+);

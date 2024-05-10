@@ -1,5 +1,6 @@
 export interface PostStore {
   posts: Post[];
+  activePostId: number | null;
   loading: boolean;
   error: Error | null;
 }
