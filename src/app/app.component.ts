@@ -1,14 +1,29 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AlertComponent } from '@share/components/alert.component';
+import { loadPosts } from './posts/+state/post.actions';
+import { selectError, selectLoading } from './posts/+state/post.selectors';
+import { PostsComponent } from './posts/posts.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [HttpClientModule, AsyncPipe, PostsComponent, AlertComponent],
+  template: ` @if (loading$ | async) {
+    <div>Loading...</div>
+    } @if (error$ | async) {
+    <app-alert class="text-center">{{ error$ | async }}</app-alert>
+    }
+
+    <app-posts></app-posts>`,
 })
 export class AppComponent {
-  title = 'post-square';
+  private readonly store = inject(Store);
+  loading$ = this.store.select(selectLoading);
+  error$ = this.store.select(selectError);
+  ngOnInit(): void {
+    this.store.dispatch(loadPosts());
+  }
 }
