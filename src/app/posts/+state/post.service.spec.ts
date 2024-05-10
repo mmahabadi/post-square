@@ -7,14 +7,6 @@ import { of } from 'rxjs';
 describe('PostService', () => {
   let service: PostService;
 
-  const post: Post = {
-    id: 1,
-    title: 'Test Post',
-    body: 'Lorem ipsum',
-    userId: 1,
-  };
-  const posts: Post[] = [post];
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
