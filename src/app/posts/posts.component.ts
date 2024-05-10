@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   imports: [AsyncPipe],
   template: `
-    <h1>Posts</h1>
+    <h1 class="text-3xl font-bold underline">Posts</h1>
     @for (item of posts$ | async; track item.id) {
     <div>{{ item.title }}</div>
     }
