@@ -7,7 +7,7 @@ import {
 } from './post.actions';
 import { PostStore } from './post.model';
 
-const initialState: PostStore = {
+export const initialState: PostStore = {
   posts: [],
   activePostId: null,
   loading: false,
